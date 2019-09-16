@@ -13,9 +13,9 @@ Amazon China Crawler
 # except:
 #     print('failed to crawl anything there')
 
-# """
-# 百度搜索
-# """
+"""
+百度搜索
+"""
 # import requests
 # keyword = "Python"
 #
@@ -33,22 +33,32 @@ Amazon China Crawler
 """
 网络图片获取及保存
 """
-import requests
-import os
-url = "https://c-ssl.duitang.com/uploads/item/201404/21/20140421074258_nERhe.jpeg"
-root = '/Users/VickyBao/Documents/Python_Web_Crawler/pics_from_web/'
-path = root + url.split('/')[-1]
+# import requests
+# import os
+# url = "https://c-ssl.duitang.com/uploads/item/201404/21/20140421074258_nERhe.jpeg"
+# root = '/Users/VickyBao/Documents/Python_Web_Crawler/pics_from_web/'
+# path = root + url.split('/')[-1]
+#
+# try:
+#     if not os.path.exists(root):
+#         os.mkdir(root)
+#     if not os.path.exists(path):
+#         r = requests.get(url)
+#         with open(path, 'wb') as f:
+#             f.write(r.content)   # r.content是文件的二进制形式，所以用b打开
+#             f.close()
+#             print("文件保存成功")
+#     else:
+#         print("文件已存在")
+# except:
+#     print("爬取失败")
 
-try:
-    if not os.path.exists(root):
-        os.mkdir(root)
-    if not os.path.exists(path):
-        r = requests.get(url)
-        with open(path, 'wb') as f:
-            f.write(r.content)   # r.content是文件的二进制形式，所以用b打开
-            f.close()
-            print("文件保存成功")
-    else:
-        print("文件已存在")
-except:
-    print("爬取失败")
+
+"""
+ip地址归属地查询: utilize website: ip138
+"""
+import requests
+url = 'http://m.ip138.com/ip.asp?ip='
+r = requests.get(url + '202.204.80.112')
+print(r.status_code)
+print(r.text[-500:])
