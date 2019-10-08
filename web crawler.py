@@ -57,8 +57,58 @@ Amazon China Crawler
 """
 ip地址归属地查询: utilize website: ip138
 """
+# # import requests
+# # url = 'http://m.ip138.com/ip.asp?ip='
+# # r = requests.get(url + '202.204.80.112')
+# # print(r.status_code)
+# # print(r.text[-500:])
+#
+# """
+# Beautiful Soup： 解析html/xml/...等标签类型数据
+# example: http://python123.io/ws/demo.html
+# """
+# import requests
+# r = requests.get('http://python123.io/ws/demo.html')
+# demo = r.text
+# # print(f'{demo}\n------------')
+#
+# from bs4 import BeautifulSoup
+# soup = BeautifulSoup(demo, 'html.parser')
+# print(soup.prettify())
+#
+# # print(f"tag a name: {soup.a.name}; tag a's parents' name:{soup.a.parent.name}"
+# #       f" tag a's grandparents'name: {soup.a.parent.parent.name}")
+#
+# # tag's attributes
+# tag = soup.a
+# print(f"tag a's attributes: {tag.attrs}")
+# print(tag.attrs['class'])
+# type(tag.attrs)  #dict
+# type(tag)   #tag
+#
+# # tag's navigable string
+# tag.string  # Basic Python
+# type(soup.p.string)   # NavigableString
+#
+# # tag's Comment
+# """
+# <! 代表comment的开头
+# """
+# newsoup = BeautifulSoup("<b><!--This is a comment--></b><p>This is not a comment</p>", "html.parser")
+# print(type(newsoup.b.string))  # Comment type
+# print(type(newsoup.p.string))  # Navigable String
+
+"""
+Example: 提取HTML中所有URL链接
+1)搜索所有<a>标签
+2）解析<a>标签格式，提取href后的链接内容
+html: view-source:https://python123.io/ws/demo.html
+"""
+from bs4 import BeautifulSoup
 import requests
-url = 'http://m.ip138.com/ip.asp?ip='
-r = requests.get(url + '202.204.80.112')
-print(r.status_code)
-print(r.text[-500:])
+r = requests.get('http://python123.io/ws/demo.html')
+demo = r.text
+soup = BeautifulSoup(demo, 'html.parser')
+
+for link in soup.find_all('a'):
+    print(link.get('href'))
